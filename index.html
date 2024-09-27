@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirect to Calendar</title>
+    <script>
+        function redirectBasedOnOS() {
+            var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check if it's an iOS device
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                // Redirect to iCal link
+                window.location.href = "https://calendar.google.com/calendar/ical/28f874baa218c16b68db26ec03279db00b695ceb6faea1359f605eef8b4ca6f1%40group.calendar.google.com/public/basic.ics";
+            } 
+            // Check if it's an Android device
+            else if (/android/i.test(userAgent)) {
+                // Redirect to Google Calendar link
+                window.location.href = "https://calendar.google.com/calendar/u/0?cid=MjhmODc0YmFhMjE4YzE2YjY4ZGIyNmVjMDMyNzlkYjAwYjY5NWNlYjZmYWVhMTM1OWY2MDVlZWY4YjRjYTZmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t";
+            } 
+            // Fallback for other devices
+            else {
+                document.getElementById('manual-links').style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<body onload="redirectBasedOnOS()">
+    <h1>Redirecting you to the correct calendar...</h1>
+
+    <!-- Fallback in case the OS can't be detected -->
+    <div id="manual-links" style="display:none;">
+        <p>If you are not redirected, choose the appropriate link:</p>
+        <ul>
+            <li><a href="https://calendar.google.com/calendar/ical/28f874baa218c16b68db26ec03279db00b695ceb6faea1359f605eef8b4ca6f1%40group.calendar.google.com/public/basic.ics">Apple Calendar (iCal)</a></li>
+            <li><a href="https://calendar.google.com/calendar/u/0?cid=MjhmODc0YmFhMjE4YzE2YjY4ZGIyNmVjMDMyNzlkYjAwYjY5NWNlYjZmYWVhMTM1OWY2MDVlZWY4YjRjYTZmMUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t">Google Calendar</a></li>
+        </ul>
+    </div>
+</body>
+</html>
